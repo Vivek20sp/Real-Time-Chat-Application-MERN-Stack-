@@ -1,0 +1,21 @@
+{
+  "name": "real_time_chat_app",
+  "version": "1.0.0",
+  "description": "Learning To make a Real time Chat App",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon backend/index.js",
+    "start": "nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "author": "Vivek Shankar Phadake",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.3",
+    "socket.io": "^4.7.5"
+  }
+}

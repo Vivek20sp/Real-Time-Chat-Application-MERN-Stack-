@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: url("../Anime-Sunset-Sky-AI-Generated-4K-Wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #555;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #121212;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #242424;
+}
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.vibrating {
+  animation: vibrate 1s ;
+}
+
+
+@media (max-width: 432px) {
+  body {
+    background-image: url("../public/chat_application_background_\ portrait.png");
+    background-repeat: no-repeat;
+    background-size: calc(100%);
+  }
+}
