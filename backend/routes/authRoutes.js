@@ -74,7 +74,7 @@ router.post(
           userId: user.id,
         },
       };
-      const secretKey = "VivekIsCollegeStudent";
+      const secretKey = process.env.JWT_SECRET_KEY;
       const jwt = jwtToken.sign(data, secretKey, {
         expiresIn: "15d", //expiry of token is 15 days
       });
@@ -138,7 +138,7 @@ router.post(
         },
       };
 
-      const secretKey = "VivekIsCollegeStudent";
+      const secretKey = process.env.JWT_SECRET_KEY;
 
       const jwt = jwtToken.sign(data, secretKey, {
         expiresIn: "15d", //expiry of token is 15 days
