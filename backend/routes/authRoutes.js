@@ -149,7 +149,7 @@ router.post(
         httpOnly: true,
       });
 
-      return res.status(200).json({ jwt });
+      return res.status(200).send({jwt:jwt});
     } catch (error) {
       console.error(error.message);
       res.status(500).send({ error: "Internal Server Error" });
