@@ -22,7 +22,6 @@ const useLogin = () => {
       if (response.errors != null) {
         throw new Error(response.error);
       }
-
       return response;
     } catch (error) {
       console.log(`Error: ${error.message}`);
