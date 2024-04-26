@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon backend/index.js",
-    "start": "concurrently \"npm run server\" \"npm run frontend\"",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "frontend": "cd frontend && npm run dev"
+    "start": "nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Vivek Shankar Phadake",
   "license": "ISC",
