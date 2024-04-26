@@ -13,7 +13,7 @@ const SocketState = (props) => {
     }
     useEffect(() => {
         if (AuthToken && !loading && userInfo !== '') {
-            const socket = io('https://real-time-chat-application-mern-stack.onrender.com', {
+            const socket = io('http://localhost:5000/', {
                 query: {
                     userId: userId,
                 }
