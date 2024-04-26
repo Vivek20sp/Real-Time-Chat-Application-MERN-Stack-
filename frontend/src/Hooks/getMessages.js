@@ -29,7 +29,7 @@ const getMessages = () => {
         );
         const response = await fetchData.json();
 
-        if (response.errors != null) {
+        if (response.error != null) {
           throw new Error(response.error);
         }
         setMessages(response.messages);
