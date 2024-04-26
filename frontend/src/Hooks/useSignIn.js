@@ -15,8 +15,8 @@ const useSignIn = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fullname: fullname,
             username: username,
+            fullname: fullname,
             email: email,
             password: password,
             gender: gender,

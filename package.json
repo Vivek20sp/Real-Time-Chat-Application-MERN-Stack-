@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon backend/index.js",
-    "start": "nodemon backend/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "start": "concurrently \"npm run server\" \"npm run frontend\"",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "frontend": "cd frontend && npm run dev"
   },
   "author": "Vivek Shankar Phadake",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.0.1",

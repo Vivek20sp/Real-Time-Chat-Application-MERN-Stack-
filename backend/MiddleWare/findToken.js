@@ -4,7 +4,7 @@ const findToken = async (req, res, next) => {
   try {
     const token = await req.header("auth-token" || "Auth-Token");
     
-    const secrets = process.env.JWT_SECRET_KEY;
+    const secrets = process.env.JWT_SECRET_KEY || "VivekIsCollegeStudent";
     
     const decodeToken = jwt.verify(token, secrets);
     

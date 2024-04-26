@@ -6,7 +6,7 @@ import Context from '../../Context/ContextApi';
 
 const SignIn = () => {
   const [gender, setgender] = useState('');
-  const {loading,signIn} = useSignIn();
+  const { loading, signIn } = useSignIn();
   const [SignUpData, setSignUpData] = useState({
     fullName: '',
     username: '',
@@ -15,21 +15,28 @@ const SignIn = () => {
     gender: gender,
   });
   const context = useContext(Context);
-  const {setAuthToken} = context;
-  
+  const { setAuthToken } = context;
   // Handling the onChange
-  
+
   const handleOnChange = (event) => {
     setSignUpData({ ...SignUpData, [event.target.name]: event.target.value });
   }
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    SignUpData.gender = gender;
-    const response = await signIn(SignUpData.fullName,SignUpData.username,SignUpData.email,SignUpData.password,SignUpData.gender);
-    localStorage.setItem('token',JSON.stringify(response));
-    setAuthToken(response);
-    console.log(response);
+    try {
+      SignUpData.gender = gender;
+      const response = await signIn(SignUpData.fullName, SignUpData.username, SignUpData.email, SignUpData.password, SignUpData.gender);
+      if (response.error) {
+        return new Error(response.error);
+      }
+      else {
+        localStorage.setItem("token", response.jwt);
+        setAuthToken(response.jwt);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
 
@@ -59,7 +66,7 @@ const SignIn = () => {
               <GenderBox setgender={setgender} />
             </label>
             <Link to="/login" className="link text-sm hover:underline hover:text-blue-600 ms-1 inline-block">Already have a account ?</Link>
-            <button disabled={loading} className="btn btn-block btn-sm mt-2" onClick={(event) => onSubmit(event)}> {loading?<span className='loading loading-spinner'></span>:'Sign-In'} </button>
+            <button disabled={loading} className="btn btn-block btn-sm mt-2" onClick={onSubmit}> {loading ? <span className='loading loading-spinner'></span> : 'Sign-In'} </button>
           </form>
         </div>
       </div>

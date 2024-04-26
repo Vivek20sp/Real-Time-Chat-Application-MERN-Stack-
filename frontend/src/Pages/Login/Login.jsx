@@ -19,15 +19,18 @@ const Login = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        let response;
         try {
-            response = await login(loginComponents.username, loginComponents.email, loginComponents.password);
-            localStorage.setItem('token', response.jwt);
-            setAuthToken(response.jwt);
+            const response = await login(loginComponents.username, loginComponents.email, loginComponents.password);
+            if(response.error){
+                return new Error(response.error);
+            }
+            else{
+                localStorage.setItem('token', response.jwt);
+                setAuthToken(response.jwt);
+            }
         } catch (error) {
             // Handle login error (e.g., display error message to the user)
             console.log(error.message);
-            console.log(response);
         }
     };
 
