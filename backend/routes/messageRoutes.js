@@ -13,7 +13,7 @@ router.get("/getMessages/:id", findToken, async (req, res) => {
     const userId = req.user;
     const user = await UserModel.findById(userId);
     if (!user) {
-      return res.status(401).json({ error: "Authentication failed" });
+      return res.status(401).send({ error: "Authentication failed" });
     }
 
     const { id: ReceiverId } = req.params;
@@ -24,7 +24,7 @@ router.get("/getMessages/:id", findToken, async (req, res) => {
     }).populate("messages");
 
     if (!conversation) {
-      return res.status(404).json({ error: "Conversation not found" });
+      return res.status(404).send({ error: "Conversation not found" });
     }
 
     res.send({ messages: conversation.messages });

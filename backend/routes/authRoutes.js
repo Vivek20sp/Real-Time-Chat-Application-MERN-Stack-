@@ -16,7 +16,7 @@ router.get("/getAllUser", findToken, async (req, res) => {
     );
 
     if (!user) {
-      return res.status(401).send({ msg: "No users found" });
+      return res.status(401).send({ error: "No users found" });
     }
 
     return res.status(200).json({ Users: user });
@@ -46,13 +46,13 @@ router.post(
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).send({ error: errors.array() });
       }
 
       let user = await UserModel.findOne({ username: req.body.username });
 
       if (user) {
-        return res.status(401).json({ error: "User already exists" });
+        return res.status(401).send({ error: "User already exists" });
       }
 
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -89,7 +89,7 @@ router.post(
       return res.status(200).send({ jwt });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send({ error: "Internal Server Error" });
     }
   }
 );
@@ -115,7 +115,7 @@ router.post(
       if (!error.isEmpty()) {
         return res
           .status(400)
-          .json({ errors: "Internal Error Occurred In Server" });
+          .json({ error: "Internal Error Occurred In Server" });
       }
 
       let user = await UserModel.findOne({ username: req.body.username });
@@ -123,13 +123,13 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ error: "Internal Error Occurred with User" });
+          .send({ error: "Internal Error Occurred with User" });
       }
 
       const ComparePassword = bcrypt.compare(req.body.password, user.password);
 
       if (!ComparePassword) {
-        return res.status(400).json({ error: "Authonication Denied" });
+        return res.status(400).send({ error: "Authonication Denied" });
       }
 
       const data = {
@@ -149,7 +149,7 @@ router.post(
         httpOnly: true,
       });
 
-      return res.status(200).send({jwt:jwt});
+      return res.status(200).send({ jwt: jwt });
     } catch (error) {
       console.error(error.message);
       res.status(500).send({ error: "Internal Server Error" });
